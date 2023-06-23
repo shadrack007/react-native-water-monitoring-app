@@ -18,22 +18,21 @@ import {
 } from '../redux/slice/userDataSlice';
 import {setLogin} from '../redux/slice/login';
 
-const StackNavigator = () => {
+const StackNavigator = ({isLoggedIn}) => {
   const Stack = createNativeStackNavigator();
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(state => state.login.value);
 
   const getUserData = async () => {
     await AsyncStorage.getItem('userData')
       .then(data => {
         if (data) {
+          dispatch(setLogin(true));
           const userDataObject = JSON.parse(data);
           dispatch(setFirstName(userDataObject.customer.first_name));
           dispatch(setMeterNumber(userDataObject.meter_number));
-          dispatch(setPhoneNumber(userDataObject.customer.meter_number));
+          dispatch(setPhoneNumber(userDataObject.customer.phone_number));
           dispatch(setRegion(userDataObject.customer.region));
           dispatch(setDistrict(userDataObject.customer.district));
-          dispatch(setLogin(true));
         } else {
           console.log('no data found');
           dispatch(setLogin(false));
