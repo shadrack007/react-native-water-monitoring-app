@@ -11,7 +11,7 @@ import {useEffect, useState} from 'react';
 const HomeScreen = () => {
   const [waterVolume, setWaterVolume] = useState(0);
   const meterNumber = useSelector(state => state.userData.meterNumber);
-  const socketUrl = `ws://192.168.33.207:8000/${meterNumber}/`;
+  const socketUrl = `ws://192.168.97.207:8000/${meterNumber}/`;
   let ws = new WebSocket(socketUrl);
 
   ws.onopen = () => {

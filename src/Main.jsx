@@ -62,6 +62,7 @@ const Main = () => {
               <Stack.Screen
                 name="Notification"
                 component={NotificationScreen}
+                options={{title: 'Water Bills Information'}}
               />
             </>
           ) : (

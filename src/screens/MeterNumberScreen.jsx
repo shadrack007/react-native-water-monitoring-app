@@ -4,7 +4,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  ToastAndroid,
   ActivityIndicator,
 } from 'react-native';
 
@@ -28,7 +27,7 @@ const MeterNumberScreen = () => {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const baseUrl = 'http://192.168.33.207:8000/api/v1/meter-detail/';
+  const baseUrl = 'http://192.168.97.207:8000/api/v1/meter-detail/';
 
   return (
     <Animatable.View
@@ -51,6 +50,8 @@ const MeterNumberScreen = () => {
                 meter_number: meterNumber,
               })
               .then(async res => {
+                setIsLoading(false);
+                setError(false);
                 const data = res.data;
                 dispatch(setMeterNumber(data.meter_number));
                 dispatch(setFirstName(data.customer.first_name));
@@ -60,8 +61,6 @@ const MeterNumberScreen = () => {
                 await AsyncStorage.setItem('userData', JSON.stringify(data));
                 dispatch(setLogin(true));
               })
-              .then(setError(false))
-              .then(setIsLoading(false))
               .catch(err => {
                 console.log(err);
                 setIsLoading(false);

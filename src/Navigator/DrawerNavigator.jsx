@@ -1,11 +1,12 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 
 import {createDrawerNavigator} from '@react-navigation/drawer';
+import {Badge, Icon, withBadge} from '@rneui/themed';
+import {useNavigation} from '@react-navigation/native';
 
 import HomeScreen from '../screens/HomeScreen';
 import CustomDrawer from '../components/CustomDrawer';
-import {Badge, Icon, withBadge} from '@rneui/themed';
-import {useNavigation} from '@react-navigation/native';
+import TabNavigator from './TabNavigator';
 
 const BadgedIcon = withBadge(15)(Icon);
 
@@ -22,17 +23,13 @@ const DrawerNavigator = () => {
             <TouchableOpacity
               className="pr-7"
               onPress={() => navigation.navigate('Notification')}>
-              <BadgedIcon
-                type="ionicon"
-                size={32}
-                name="notifications-outline"
-              />
+              <Icon type="ionicon" size={32} name="notifications-outline" />
             </TouchableOpacity>
           ),
           title: 'Smart Water Meter ',
         }}>
         {/* drawerContent={props => <CustomDrawer props={props} />} */}
-        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="TopTab" component={TabNavigator} />
       </Drawer.Navigator>
     </View>
   );
